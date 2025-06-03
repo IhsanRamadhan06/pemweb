@@ -1,6 +1,6 @@
 <?php
 // niflix_project/app/Views/film/index.php
-// $film, $title, $message, $message_type akan tersedia dari filmController
+// $film, $title, $message, $message_type akan tersedia dari FilmController
 
 // Memuat header
 require_once APP_ROOT . '/app/Views/includes/header.php';
@@ -26,13 +26,13 @@ if ($basePath === '/') {
             <div class="film-list article-list">
                 <?php foreach ($film as $s): ?>
                 <div class="film-item article-item">
-                    <h2><a href="<?= $basePath ?>/daftar_film/<?= escape_html($s['id']) ?>"><?= escape_html($s['title']) ?></a></h2>
+                    <h2><a href="<?= $basePath ?>/daftar_film/show/<?= escape_html($s['id']) ?>"><?= escape_html($s['title']) ?></a></h2>
                     <?php if (!empty($s['image_url'])): ?>
                         <img src="<?= escape_html($s['image_url']) ?>" alt="<?= escape_html($s['title']) ?>" class="film-thumbnail">
                     <?php endif; ?>
                     <p><?= escape_html(substr($s['description'], 0, 150)) ?>...</p>
                     <p class="film-meta">Tahun Rilis: <?= escape_html($s['release_year']) ?></p>
-                    <a href="<?= $basePath ?>/daftar_film/<?= escape_html($s['id']) ?>" class="btn">Lihat Detail</a>
+                    <a href="<?= $basePath ?>/daftar_film/show/<?= escape_html($s['id']) ?>" class="btn">Lihat Detail</a>
                 </div>
                 <?php endforeach; ?>
             </div>
