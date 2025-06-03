@@ -1,0 +1,18 @@
+# niflix_project/public/.htaccess
+
+#Modul untuk menulis ulang url
+<IfModule mod_rewrite.c>
+
+    #Mengaktifkan modul
+    RewriteEngine On
+
+    # Otomatis akan ke url ini
+    RewriteBase /niflix_project/public/
+
+    # Jangan menulis ulang url jika url yang dituju ada file dan folder fisik
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # kalau url yang dituju gak ada file ato folder fisik, maka menuju index.php
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule> 
