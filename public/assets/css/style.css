@@ -1,0 +1,580 @@
+/* niflix_project/public/assets/css/style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    animation: backgroundMove 10s ease-in-out infinite;
+}
+
+/* Animasi background */
+@keyframes backgroundMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 2% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Header (tambahan untuk memastikan header tetap di atas saat scroll) */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #111;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+/* Navigasi (jika diperlukan untuk header_profile) */
+.nav-menu {
+    display: none; /* Sembunyikan secara default di mobile */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #111;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    z-index: 999;
+    max-height: calc(100vh - 60px); /* Maks tinggi menu agar tidak keluar layar */
+    overflow-y: auto; /* Aktifkan scroll vertikal jika konten menu terlalu banyak */
+}
+
+.nav-menu.active {
+    display: flex;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Memastikan ul mengambil lebar penuh */
+    /* Tambahan untuk rata tengah di desktop */
+    justify-content: center; /* Akan digunakan di media query desktop */
+    flex-wrap: wrap; /* Izinkan wrap jika terlalu banyak item */
+}
+
+.nav-menu ul li {
+    text-align: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #444;
+}
+
+.nav-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #ffcc00;
+    font-weight: bold;
+    display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-menu ul li a:hover {
+    color: #ff9100;
+    background-color: #222;
+}
+
+.menu-toggle { /* Untuk mobile, selalu tampilkan toggle di halaman yang menggunakan style.css jika ada header */
+    display: block;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+/* Main content (penting agar tidak tertutup header) */
+main {
+    flex-grow: 1; /* Memastikan main content mengisi ruang yang tersisa */
+    padding-top: 60px; /* Sesuaikan dengan tinggi header */
+    display: flex; /* Tambahkan flex untuk centering container profil */
+    justify-content: center; /* Pusatkan secara horizontal */
+    align-items: flex-start; /* Sejajarkan di bagian atas */
+    min-height: calc(100vh - 120px); /* Sesuaikan tinggi agar footer tidak menimpa */
+    box-sizing: border-box;
+}
+
+/* Container untuk Login/Register box */
+.auth-container {
+    width: 90%; /* Default 90% lebar untuk mobile */
+    max-width: 400px; /* Lebar maksimum 400px untuk desktop */
+    padding: 25px; /* Tambah padding */
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin: 150px auto; /* Margin atas/bawah agar ada ruang */
+    box-sizing: border-box; /* Penting untuk padding dan lebar */
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px; /* Tambah margin bawah */
+}
+
+.auth-header h2 { /* Selector lebih spesifik untuk header di auth-container */
+    font-size: 28px; /* Lebih besar dari sebelumnya */
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #ffcc00;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px; /* Lebih banyak padding */
+    border: none;
+    border-radius: 5px;
+    background: #333; /* Warna background input */
+    color: #fff; /* Warna teks input */
+    font-size: 16px;
+    box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+    border: 1px solid #444; /* Border halus */
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #ffcc00; /* Border kuning saat fokus */
+    background: #222; /* Sedikit lebih gelap saat fokus */
+    outline: none; /* Hilangkan outline default browser */
+}
+
+.input-group i {
+    position: absolute;
+    right: 12px; /* Sesuaikan posisi ikon */
+    color: #ffcc00;
+    top: 50%; /* Pusatkan secara vertikal */
+    transform: translateY(-50%); /* Penyesuaian vertikal */
+    font-size: 20px;
+    pointer-events: none; /* Agar tidak mengganggu klik input */
+}
+
+/* Perbaikan: Atur posisi ikon agar tidak offside saat label terlihat */
+.input-group label + .input-field + i {
+    top: calc(50% + 10px); /* Sesuaikan jika ada label di atas input */
+}
+
+
+.forgot-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.forgot-section a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-section a:hover {
+    color: #e6b800;
+    text-decoration: underline;
+}
+
+.submit-group {
+    text-align: center;
+    margin-bottom: 15px; /* Spasi bawah tombol */
+}
+
+.submit-btn {
+    width: 100%; /* Lebar 100% untuk responsivitas */
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #ffcc00;
+    color: #333;
+    font-size: 18px; /* Ukuran font tombol lebih besar */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative; /* Untuk pseudo-elemen */
+    overflow: hidden; /* Penting agar pseudo-elemen tidak keluar */
+    z-index: 1; /* Pastikan tombol di atas garis */
+}
+
+.submit-btn:hover {
+    background: #e6b800;
+}
+
+/* Efek garis animasi di atas dan bawah tombol */
+.submit-btn::before,
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%; /* Lebar 100% dari tombol */
+    height: 2px;
+    background: linear-gradient(to right, #ff0000, #00ffff);
+    transform: scaleX(0);
+    transition: transform 0.4s ease-out;
+    z-index: -1; /* Di belakang tombol */
+}
+
+.submit-btn::before {
+    top: -5px; /* Sedikit di atas tombol */
+    transform-origin: left;
+}
+
+.submit-btn::after {
+    bottom: -5px; /* Sedikit di bawah tombol */
+    transform-origin: right;
+}
+
+.submit-btn:hover::before,
+.submit-btn:hover::after {
+    transform: scaleX(1);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+    color: #e6b800;
+}
+
+/* Notifikasi (success/error) */
+.notification {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333; /* Warna teks gelap agar terbaca di latar belakang cerah */
+}
+
+.notification.success {
+    background-color: #4CAF50; /* Hijau */
+    color: white; /* Teks putih */
+}
+
+.notification.error {
+    background-color: #f44336; /* Merah */
+    color: white; /* Teks putih */
+}
+
+/* Media Queries untuk responsivitas */
+@media (max-width: 480px) {
+    body {
+        animation: backgroundMove 5s ease-in-out infinite; /* Animasi lebih cepat di mobile */
+    }
+    .auth-container {
+        padding: 15px; /* Kurangi padding di layar sangat kecil */
+    }
+    .auth-header h2 {
+        font-size: 24px;
+    }
+    .submit-btn {
+        font-size: 16px;
+    }
+    .profile-container {
+        margin-top: 100px;
+    }
+}
+
+/* Styling untuk Halaman Profil */
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto; /* Sesuaikan margin agar tidak terlalu dekat dengan header, dan pusatkan */
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    /* margin-top: 80px; */ /* Dihapus karena padding-top di main sudah menangani ini */
+    /* margin-bottom: 30px; */ /* Dihapus agar lebih konsisten dengan margin auto di atas */
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-header h1 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+    font-size: 2.2em;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column; /* Default stack vertikal di mobile */
+    gap: 20px; /* Jarak antar section */
+    align-items: center; /* Pusatkan item di tengah secara horizontal */
+}
+
+.profile-photo-section {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+.profile-info-section {
+    flex: 2;
+    padding: 10px;
+    width: 100%; /* Penting agar mengambil lebar penuh di mobile */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pusatkan item secara horizontal di mobile */
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffcc00;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.4); /* Glow effect */
+}
+
+.profile-info {
+    margin-bottom: 20px;
+    width: 100%; /* Pastikan mengambil lebar penuh agar centering input berfungsi */
+    display: flex;
+    flex-direction: column; /* Label dan input ditumpuk vertikal */
+    align-items: center; /* Pusatkan label dan input di sini */
+}
+
+.profile-info label {
+    display: block; /* Tetap blok agar label di atas input di mobile */
+    margin-bottom: 8px;
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 1.1em;
+    width: 100%; /* Pastikan label mengambil lebar penuh */
+}
+
+.profile-info input,
+.profile-info textarea,
+.input-new-password { /* Terapkan styling input yang sama */
+    width: 100%; /* Lebar 100% dari parent (profile-info atau password-section) */
+    max-width: 350px; /* Batasi lebar maksimum input untuk estetika di desktop */
+    padding: 10px;
+    margin-bottom: 15px; /* Ruang di bawah setiap input */
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    box-sizing: border-box;
+    text-align: center; /* Pusatkan teks di dalam input */
+}
+
+.profile-info input:focus,
+.profile-info textarea:focus,
+.input-new-password:focus {
+    border-color: #ffcc00;
+    outline: none;
+    background: #333;
+}
+
+.btn-update {
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 12px 25px; /* Tambah padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+    display: block; /* Buat tombol memenuhi lebar */
+    width: 100%;
+    margin: 20px auto 0 auto; /* Pusatkan tombol update */
+    max-width: 350px; /* Sesuaikan lebar tombol dengan input */
+}
+
+.btn-update:hover {
+    background: #e6b800;
+}
+
+.password-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #444;
+    width: 100%; /* Pastikan mengambil lebar penuh */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pusatkan elemen di dalam password section */
+}
+
+.password-section h3 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-align: center; /* Pusatkan judul Change Password */
+}
+
+.photo-upload {
+    text-align: center;
+}
+
+.photo-upload input[type="file"] {
+    width: auto; /* Biarkan input file menyesuaikan lebar kontennya */
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    box-sizing: border-box;
+    margin: 0 auto; /* Pusatkan input file itu sendiri */
+    display: block; /* Agar margin auto berfungsi */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
+}
+
+/* Media queries untuk responsivitas */
+@media (min-width: 768px) {
+    .profile-content {
+        flex-direction: row; /* Foto dan info side-by-side di desktop */
+        align-items: flex-start; /* Sejajarkan di bagian atas */
+        gap: 40px;
+        justify-content: center; /* Pusatkan keseluruhan flex container */
+    }
+    .profile-photo-section {
+        flex: 0 0 200px; /* Lebar tetap untuk foto */
+        padding-right: 0;
+        text-align: center;
+    }
+    .profile-info-section {
+        flex: 1; /* Biarkan bagian info mengisi sisa ruang */
+        padding-left: 0;
+        align-items: flex-start; /* Sejajarkan label dan input ke kiri */
+    }
+
+    .profile-info,
+    .password-section {
+        align-items: flex-start; /* Label dan input sejajar kiri di desktop */
+        width: 100%; /* Penting agar input mengambil lebar yang ditentukan */
+    }
+
+    .profile-info .input-row { /* Menambahkan ini untuk memperbaiki tata letak input di desktop */
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px; /* Sesuaikan jarak antar input */
+    }
+
+    .profile-info label,
+    .password-section label {
+        width: 150px; /* Beri label lebar tetap */
+        display: inline-block; /* Agar bisa sejajar dengan input */
+        margin-bottom: 0; /* Hapus margin bawah default */
+        vertical-align: middle;
+        padding-right: 15px; /* Sedikit padding untuk pemisah */
+        box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+    }
+
+    .profile-info input,
+    .profile-info textarea, /* Tambahkan textarea di sini juga */
+    .input-new-password {
+        width: calc(100% - 165px); /* Sesuaikan lebar input (total lebar - lebar label - padding label) */
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0; /* Hapus margin bawah di desktop */
+        text-align: left; /* Teks input rata kiri di desktop */
+        max-width: none; /* Hapus batasan max-width di desktop */
+    }
+
+    .photo-upload label {
+        text-align: center; /* Pusatkan teks label upload foto */
+        width: 100%; /* Pastikan label mengambil seluruh lebar */
+    }
+    .photo-upload input[type="file"] {
+        width: auto;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .password-section h3 {
+        text-align: left; /* Rata kiri judul Change Password di desktop */
+        width: 100%;
+    }
+
+    .btn-update {
+        margin: 20px 0 0 0; /* Reset margin auto di desktop, rata kiri */
+        max-width: none; /* Hilangkan batasan lebar */
+        align-self: flex-start; /* Sejajarkan tombol ke kiri */
+    }
+}
+
+@media (min-width: 1024px) {
+    .profile-container {
+        padding: 40px; /* Tambah padding keseluruhan container */
+    }
+    .profile-content {
+        gap: 60px; /* Tambah jarak antar bagian di layar lebih besar */
+    }
+    .profile-info label,
+    .password-section label {
+        width: 180px; /* Beri label lebih banyak ruang */
+    }
+    .profile-info input,
+    .profile-info textarea,
+    .input-new-password {
+        width: calc(100% - 195px); /* Sesuaikan lebar input (total lebar - lebar label - padding label) */
+    }
+    .btn-update {
+        max-width: 300px; /* Batasi lebar tombol di desktop besar */
+        margin: 20px auto 0 0; /* Pusatkan tombol atau biarkan rata kiri */
+    }
+}
+
+@media (max-width: 320px) {
+    .profile-container {
+        padding: 10px;
+    }
+    .profile-info input,
+    .profile-info textarea,
+    .input-new-password,
+    .btn-update {
+        max-width: 100%; /* Gunakan lebar penuh yang tersedia */
+    }
+}

@@ -1,0 +1,334 @@
+/* niflix_project/public/assets/css/style_admin.css */
+
+/* Container untuk halaman admin */
+.admin-container { /* Ganti .admin menjadi .admin-container untuk lebih spesifik */
+    padding: 20px;
+    background: #111; /* Latar belakang gelap konsisten */
+    color: white;
+    min-height: calc(100vh - 120px); /* Sesuaikan tinggi agar footer tidak menimpa */
+    margin-top: 60px; /* Jaga jarak dari header fixed */
+}
+
+h1 {
+    color: #ffcc00;
+    text-align: center;
+    margin: 20px 0 30px 0; /* Tambah margin bawah */
+    font-size: 2em;
+}
+
+table {
+    width: 95%; /* Sedikit lebih kecil dari 100% untuk margin */
+    border-collapse: collapse;
+    margin: 0 auto 30px auto; /* Pusatkan tabel, beri margin bawah */
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px; /* Sudut membulat */
+    overflow: hidden; /* Penting untuk border-radius pada tabel */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Sedikit bayangan */
+}
+
+th, td {
+    padding: 12px 15px; /* Tambah padding */
+    border: none; /* Hilangkan border antar sel bawaan */
+    text-align: left;
+}
+
+th {
+    background: #222;
+    color: #ffcc00;
+    font-weight: bold;
+    text-transform: uppercase; /* Huruf kapital semua untuk header */
+    letter-spacing: 0.05em;
+}
+
+td {
+    background: #333;
+    color: white;
+}
+
+/* Garis pemisah antar baris */
+table tr {
+    border-bottom: 1px solid #444; /* Garis pemisah abu-abu tua */
+}
+
+table tbody tr:last-of-type {
+    border-bottom: none; /* Hilangkan garis di baris terakhir */
+}
+
+/* Efek striped rows (baris genap lebih terang) */
+table tbody tr:nth-of-type(even) {
+    background-color: #2a2a2a; /* Warna sedikit lebih terang */
+}
+
+/* Efek hover pada baris */
+table tbody tr:hover {
+    background-color: #3d3d3d; /* Lebih terang saat dihover */
+    transition: background-color 0.3s ease;
+}
+
+.action-links a {
+    color: #ffcc00;
+    text-decoration: none;
+    margin-right: 15px; /* Spasi antar link */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.action-links a:hover {
+    color: #ff9100;
+    text-decoration: underline;
+}
+
+/* Tombol kembali (jika ada) */
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #ffcc00;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #e6b800;
+}
+
+/* Notifikasi (success/error) */
+.notification {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.notification.error {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Untuk membuat tabel responsif di layar kecil */
+@media screen and (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto; /* Aktifkan scroll horizontal jika tabel melebihi lebar layar */
+        white-space: nowrap; /* Jangan wrap isi sel */
+        -webkit-overflow-scrolling: touch; /* Untuk smooth scrolling di iOS */
+    }
+
+    table thead {
+        display: block; /* Agar thead mengambil lebar penuh dari container */
+        width: auto;
+        position: sticky; /* Tetap di atas saat scroll */
+        top: 0; /* Sesuaikan dengan tinggi header jika perlu */
+        z-index: 10; /* Pastikan di atas tbody saat scroll */
+    }
+
+    table tbody {
+        display: block; /* Agar tbody juga bisa di-scroll */
+        width: 100%;
+        overflow-x: auto; /* Memungkinkan tbody untuk scroll secara independen */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table th, table td {
+        min-width: 120px; /* Lebar minimum untuk setiap kolom agar tidak terlalu sempit */
+        box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+    }
+
+    table tr {
+        display: inline-table; /* Agar baris bisa di-scroll horizontal */
+        width: 100%; /* Setiap baris mengambil lebar penuh */
+        border-bottom: 1px solid #444; /* Tetap ada garis pemisah */
+    }
+
+    .admin-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .action-links a {
+        margin-right: 10px;
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 10px 8px   ;
+    }
+}
+
+/* Styling untuk Form Edit Pengguna (Admin) */
+.admin-edit-user-container {
+    max-width: 700px; /* Lebar maksimal agar tidak terlalu lebar */
+    margin-top: 80px; /* Pastikan ada jarak dari header */
+    margin-bottom: 30px;
+}
+
+.admin-edit-user-container .profile-photo-section {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+}
+
+.admin-edit-user-container .profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffcc00;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+.admin-edit-user-container .photo-upload label {
+    display: inline-block;
+    background-color: #555;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-edit-user-container .photo-upload label:hover {
+    background-color: #666;
+}
+
+.admin-edit-user-container .photo-upload input[type="file"] {
+    display: none; /* Sembunyikan input file asli */
+}
+
+.admin-edit-user-container .profile-info-section {
+    width: 100%;
+}
+
+.admin-edit-user-container .input-group {
+    margin-bottom: 20px;
+}
+
+.admin-edit-user-container label {
+    display: block;
+    color: #ffcc00;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.admin-edit-user-container input[type="text"],
+.admin-edit-user-container input[type="email"],
+.admin-edit-user-container input[type="password"],
+.admin-edit-user-container select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    font-size: 1em;
+    box-sizing: border-box;
+    appearance: none; /* Untuk menghapus styling default select box */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.admin-edit-user-container select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc00'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+.admin-edit-user-container input:focus,
+.admin-edit-user-container select:focus {
+    border-color: #ffcc00;
+    outline: none;
+    background: #2a2a2a;
+}
+
+.admin-edit-user-container .password-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.admin-edit-user-container .password-section h3 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-edit-user-container .form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.admin-edit-user-container .btn-update,
+.admin-edit-user-container .btn-cancel {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+@media (min-width: 768px) {
+    .admin-edit-user-container form {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .admin-edit-user-container .profile-photo-section {
+        flex: 0 0 200px;
+        border-bottom: none;
+        padding-bottom: 0;
+        border-right: 1px solid #444;
+        padding-right: 30px;
+    }
+
+    .admin-edit-user-container .profile-info-section {
+        flex: 1;
+    }
+
+    .admin-edit-user-container .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .admin-edit-user-container label {
+        width: 150px; /* Lebar tetap untuk label di desktop */
+        margin-bottom: 0;
+        margin-right: 15px;
+        text-align: right;
+    }
+
+    .admin-edit-user-container input[type="text"],
+    .admin-edit-user-container input[type="email"],
+    .admin-edit-user-container input[type="password"],
+    .admin-edit-user-container select {
+        width: calc(100% - 165px); /* Sesuaikan lebar input */
+    }
+
+    .admin-edit-user-container .password-section h3 {
+        text-align: left;
+    }
+
+    .admin-edit-user-container .form-actions {
+        text-align: left;
+    }
+}

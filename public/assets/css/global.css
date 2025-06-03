@@ -1,0 +1,245 @@
+/* niflix_project/public/assets/css/global.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #111; /* Default background for all pages */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.menu-toggle {
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+    padding: 0;
+    display: block; /* Always display on mobile */
+}
+
+.nav-menu {
+    display: none; /* Hidden by default on mobile */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #111;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    z-index: 999;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+.nav-menu.active {
+    display: flex;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.nav-menu ul li {
+    text-align: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #444;
+}
+
+.nav-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #ffcc00;
+    font-weight: bold;
+    display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-menu ul li a:hover {
+    color: #ff9100;
+    background-color: #222;
+}
+
+/* Main content default */
+main {
+    flex-grow: 1;
+    padding-top: 60px; /* Adjust for fixed header */
+    min-height: calc(100vh - 120px); /* Adjust for header and footer */
+    box-sizing: border-box;
+}
+
+/* General button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ffcc00;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    background: #e6b800;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
+}
+
+/* Notification styles */
+.notification {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.notification.error {
+    background-color: #f44336;
+    color: white;
+}
+
+.notification.info {
+    background-color: #2196F3;
+    color: white;
+}
+
+.info-message {
+    text-align: center;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: #ccc;
+    font-style: italic;
+}
+
+.info-message a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.info-message a:hover {
+    text-decoration: underline;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
+}
+
+/* Media Queries for Responsiveness (Header/Navigation) */
+
+/* Tablet/Desktop (Min-width 768px) */
+@media (min-width: 768px) {
+    header {
+        padding: 0 20px;
+        justify-content: space-between;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+        width: auto;
+        max-height: none;
+        overflow-y: visible;
+        flex-grow: 1;
+        justify-content: flex-end; /* Dorong menu ke kanan */
+        align-items: center;
+    }
+
+    .nav-menu ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        flex-wrap: wrap; /* Izinkan wrap agar tidak terpotong jika terlalu banyak item */
+        justify-content: flex-end;
+        width: auto; /* Biarkan lebar ul menyesuaikan konten */
+    }
+
+    .nav-menu ul li {
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    .nav-menu ul li a {
+        padding: 8px 0;
+        font-size: 14px;
+        white-space: nowrap;
+    }   
+}
+
+/* Laptop/Desktop (Min-width 1024px) */
+@media (min-width: 1024px) {
+    header {
+        padding: 0 30px;
+    }
+
+    .nav-menu ul li {
+        padding: 0 15px;
+    }
+
+    .nav-menu ul li a {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,190 @@
+/* niflix_project/public/assets/css/auth.css */
+
+body {
+    background: url('https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png') no-repeat center center fixed;
+    background-size: cover;
+    animation: backgroundMove 10s ease-in-out infinite;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 2% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+}
+
+.auth-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin: 150px auto;
+    box-sizing: border-box;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-header h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #ffcc00;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid #444;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #ffcc00;
+    background: #222;
+    outline: none;
+}
+
+.input-group i {
+    position: absolute;
+    right: 12px;
+    color: #ffcc00;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.input-group label + .input-field + i {
+    top: calc(50% + 10px);
+}
+
+.forgot-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.forgot-section a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-section a:hover {
+    color: #e6b800;
+    text-decoration: underline;
+}
+
+.submit-group {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #ffcc00;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.submit-btn:hover {
+    background: #e6b800;
+}
+
+.submit-btn::before,
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #ff0000, #00ffff);
+    transform: scaleX(0);
+    transition: transform 0.4s ease-out;
+    z-index: -1;
+}
+
+.submit-btn::before {
+    top: -5px;
+    transform-origin: left;
+}
+
+.submit-btn::after {
+    bottom: -5px;
+    transform-origin: right;
+}
+
+.submit-btn:hover::before,
+.submit-btn:hover::after {
+    transform: scaleX(1);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+    color: #e6b800;
+}
+
+@media (max-width: 480px) {
+    body {
+        animation: backgroundMove 5s ease-in-out infinite;
+    }
+    .auth-container {
+        padding: 15px;
+    }
+    .auth-header h2 {
+        font-size: 24px;
+    }
+    .submit-btn {
+        font-size: 16px;
+    }
+}
