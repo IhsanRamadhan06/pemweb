@@ -48,10 +48,10 @@ if (strpos($authorPhotoUrl, 'default.png') !== false && !file_exists(PUBLIC_PATH
                     $currentUser = Session::get('user');
                     if (isset($currentUser) && ($currentUser['id'] == $article['user_id'] || $currentUser['is_admin'] == 1)) :
                 ?>
-                    <div class="article-actions-bottom">
-                        <a href="<?= $basePath ?>/articles/edit/<?= escape_html($article['id']) ?>" class="btn-edit">Edit Artikel</a>
+                    <div class="article-actions-right">
+                        <a href="<?= $basePath ?>/articles/edit/<?= escape_html($article['id']) ?>" class="btn-edit-global">Edit</a>
                         <a href="<?= $basePath ?>/articles/delete/<?= escape_html($article['id']) ?>"
-                           onclick="return confirm('Yakin ingin menghapus artikel ini? Semua komentar juga akan terhapus.')" class="btn-delete">Hapus Artikel</a>
+                        onclick="return confirm('Yakin ingin menghapus artikel ini? Semua komentar juga akan terhapus.')" class="btn-delete">Hapus</a>
                     </div>
                 <?php endif; ?>
             </article>
@@ -93,9 +93,9 @@ if (strpos($authorPhotoUrl, 'default.png') !== false && !file_exists(PUBLIC_PATH
                                     // 3. Pengguna saat ini adalah admin
                                     if (isset($currentUser) && ($currentUser['id'] == $comment['user_id'] || $currentUser['id'] == $article['user_id'] || $currentUser['is_admin'] == 1)) :
                                 ?>
-                                    <div class="comment-actions">
+                                    <div class="article-actions-right">
                                         <a href="<?= $basePath ?>/comment/delete/<?= escape_html($comment['id']) ?>"
-                                        onclick="return confirm('Yakin ingin menghapus komentar ini?')" class="btn-delete-comment">Hapus</a>
+                                        onclick="return confirm('Yakin ingin menghapus komentar ini?')" class="btn-delete">Hapus</a>
                                     </div>
                                 <?php endif; ?>
                             </div>

@@ -75,18 +75,25 @@
     padding-top: 15px;
 }
 
+.article-actions-right {
+    margin-top: 15px;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    text-align: right;
+}
+
 .article-actions a {
     font-size: 0.9em;
     padding: 8px 12px;
 }
 
 .btn-edit {
-    background-color: #2196F3;
+    background-color: #2196f3;
     color: white;
 }
 
 .btn-edit:hover {
-    background-color: #1976D2;
+    background-color: #1976d2;
 }
 
 .btn-delete {
@@ -125,8 +132,8 @@
 }
 
 .single-article .author-photo-thumb {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
@@ -262,9 +269,9 @@
     font-size: 1.1em;
 }
 
-.form-container form input[type="text"],
-.form-container form input[type="email"],
-.form-container form input[type="password"],
+.form-container form input[type='text'],
+.form-container form input[type='email'],
+.form-container form input[type='password'],
 .form-container form textarea {
     width: 100%;
     padding: 12px;

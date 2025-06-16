@@ -3,12 +3,18 @@
 
 require_once APP_ROOT . '/app/Core/Session.php';
 require_once APP_ROOT . '/app/Core/Functions.php';
+require_once APP_ROOT . '/app/Models/Film.php';  
+require_once APP_ROOT . '/app/Models/Series.php';
 
 class DashboardController {
     private $pdo;
+    private $filmModel;   // Tambahkan properti ini
+    private $seriesModel; // Tambahkan properti ini
 
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
+        $this->filmModel = new Film($pdo);     // Inisialisasi model Film
+        $this->seriesModel = new Series($pdo); // Inisialisasi model Series
     }
 
     public function index() {
@@ -17,22 +23,28 @@ class DashboardController {
             redirect('/auth/login');
         }
 
-        // Data film dan series (sementara masih statis)
-        $film = [
-            ["title" => "Inception", "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJyjBC4dx19LTH6CBmbDIpNCrelbYJSplrUA&s"],
-            ["title" => "Interstellar", "image" => "https://upload.wikimedia.org/wikipedia/id/b/bc/Interstellar_film_poster.jpg"],
-            ["title" => "The Dark Knight", "image" => "https://upload.wikimedia.org/wikipedia/id/8/8a/Dark_Knight.jpg"],
-            ["title" => "Avatar", "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpypb6nI7UrJtPHuHDnzAsO5_tP1uwd_raIw&s"],
-            ["title" => "The Matrix", "image" => "https://images-cdn.ubuy.co.id/63497d4c524b6263e43a00ee-the-matrix-movie-poster-us-version-24x36.jpg"]
-        ];
+        // Ambil data film dari database
+        $dbFilms = $this->filmModel->getAllFilm(); // Mengambil semua film dari database
 
-        $series = [
-            ["title" => "Stranger Things", "image" => "https://awsimages.detik.net.id/community/media/visual/2017/10/23/d94f3168-b35d-4db2-844f-93b4d463261b.jpg?w=600&q=90"],
-            ["title" => "Breaking Bad", "image" => "https://m.media-amazon.com/images/I/51fWOBx3agL.AC_UF894,1000_QL80.jpg"],
-            ["title" => "Game of Thrones", "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX60Jzu04x_G8OHcBGmy_GK6T4X1jLZgQ-JA&s"],
-            ["title" => "The Walking Dead", "image" => "https://upload.wikimedia.org/wikipedia/id/thumb/0/0e/TheWalkingDeadPoster.jpg/220px-TheWalkingDeadPoster.jpg"],
-            ["title" => "Sherlock", "image" => "https://m.media-amazon.com/images/I/51+LSKG5-FL.jpg"]
-        ];
+        // Ambil data series dari database
+        $dbSeries = $this->seriesModel->getAllSeries(); // Mengambil semua series dari database
+
+        // Ubah struktur data agar sesuai dengan yang diharapkan oleh view (misal: 'image_url' menjadi 'image')
+        $film = [];
+        foreach ($dbFilms as $f) {
+            $film[] = [
+                "title" => $f['title'],
+                "image" => $f['image_url'] // Menggunakan 'image_url' dari database
+            ];
+        }
+
+        $series = [];
+        foreach ($dbSeries as $s) {
+            $series[] = [
+                "title" => $s['title'],
+                "image" => $s['image_url'] // Menggunakan 'image_url' dari database
+            ];
+        }
 
         $data = [
             'user_username' => Session::get('user')['username'] ?? 'Guest',

@@ -1,6 +1,6 @@
 <?php
 // niflix_project/app/Views/dashboard.php
-// $user_username, $movies, $series akan tersedia dari DashboardController
+// $user_username, $film, $series akan tersedia dari DashboardController
 
 // Memuat header
 require_once APP_ROOT . '/app/Views/includes/header.php';
@@ -13,9 +13,9 @@ require_once APP_ROOT . '/app/Views/includes/header.php';
     <section>
         <div class="slider-wrapper">
             <div class="slider-container">
-                <?php foreach ($film as $movie): ?>
+                <?php foreach ($film as $f): ?>
                     <div class="slider-item">
-                        <img src="<?= escape_html($movie['image']) ?>" alt="<?= escape_html($movie['title']) ?>">
+                        <img src="<?= escape_html($f['image']) ?>" alt="<?= escape_html($f['title']) ?>">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -24,11 +24,11 @@ require_once APP_ROOT . '/app/Views/includes/header.php';
     <section>
         <h1>Daftar Film</h1>
         <div class="grid-container">
-            <?php foreach ($film as $film): ?>
+            <?php foreach ($film as $f): ?>
                 <div class="grid-item">
-                    <img src="<?= escape_html($film['image']) ?>" alt="<?= escape_html($film['title']) ?>">
-                    <h4><?= escape_html($film['title']) ?></h4>
-                    <a href="<?= $basePath ?>/review_film?film=<?= urlencode($film['title']) ?>" class="btn">Review</a>
+                    <img src="<?= escape_html($f['image']) ?>" alt="<?= escape_html($f['title']) ?>">
+                    <h4><?= escape_html($f['title']) ?></h4>
+                    <a href="<?= $basePath ?>/review_films?film=<?= urlencode($f['title']) ?>" class="btn">Review</a>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -142,7 +142,8 @@ class ProfileController {
                         'id' => $updatedUser['id'],
                         'username' => $updatedUser['username'],
                         'is_admin' => $updatedUser['is_admin'],
-                        'photo' => $updatedUser['foto_pengguna'] // Update foto di session
+                        'photo' => $updatedUser['foto_pengguna'], // Update foto di session
+                        'fullname' => $updatedUser['nama_lengkap'] // Tambahkan ini
                     ]);
                     // Refresh data pengguna yang ditampilkan di form
                     $currentUser = $updatedUser;
@@ -158,7 +159,9 @@ class ProfileController {
                     'success' => empty($error),
                     'message' => $error ?: $message,
                     'new_photo_url' => $newPhotoUrl,
-                    'password_updated' => $passwordUpdated
+                    'password_updated' => $passwordUpdated,
+                    'new_username' => $currentUser['username'], // Tambahkan ini
+                    'new_fullname' => $currentUser['nama_lengkap'] // Tambahkan ini
                 ]);
                 exit(); // Hentikan eksekusi setelah mengirim respons JSON
             }

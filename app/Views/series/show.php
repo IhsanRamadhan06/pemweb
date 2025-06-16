@@ -12,6 +12,10 @@ if ($basePath === '/') {
 } else {
     $basePath = rtrim($basePath, '/');
 }
+
+// Cek apakah pengguna adalah admin
+$currentUser = Session::get('user');
+$isAdmin = isset($currentUser) && $currentUser['is_admin'] == 1;
 ?>
 
 <main>
@@ -28,7 +32,17 @@ if ($basePath === '/') {
                 <div class="article-content">
                     <?= nl2br(escape_html($series['description'])) ?>
                 </div>
+
+                <?php if ($isAdmin): // Tampilkan tombol edit/hapus hanya untuk admin ?>
+                    <div class="series-actions">
+                        <a href="<?= $basePath ?>/daftar_series/edit/<?= escape_html($series['id']) ?>" class="btn-edit">Edit Series</a>
+                        <a href="<?= $basePath ?>/daftar_series/delete/<?= escape_html($series['id']) ?>"
+                           onclick="return confirm('Yakin ingin menghapus series ini?')" class="btn-delete">Hapus Series</a>
+                    </div>
+                <?php endif; ?>
             </article>
+            <a href="<?= $basePath ?>/review_series/create" class="btn-link">Review Series</a>
+            <a href="<?= $basePath ?>/komentar_rating/detail/film/<?= escape_html($series['id']) ?>" class="btn-link">Komentar Rating</a>
         <?php else: ?>
             <p>Series tidak ditemukan.</p>
         <?php endif; ?>

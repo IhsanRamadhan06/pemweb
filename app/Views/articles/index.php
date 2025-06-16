@@ -24,11 +24,7 @@ if ($basePath === '/') {
             <div class="notification <?= escape_html($message_type ?? '') ?>"><?= escape_html($message) ?></div>
         <?php endif; ?>
 
-        <?php if (Session::has('user')): // Hanya tampilkan tombol buat artikel jika sudah login ?>
-            <p><a href="<?= $basePath ?>/articles/create" class="btn btn-create-article">Buat Artikel Baru</a></p>
-        <?php else: ?>
-            <p class="info-message">Login untuk membuat artikel baru.</p>
-        <?php endif; ?>
+        <p><a href="<?= $basePath ?>/articles/create" class="btn btn-create-article">Buat Artikel Baru</a></p>
 
 
         <?php if (!empty($articles)): ?>
@@ -44,8 +40,8 @@ if ($basePath === '/') {
                         if (isset($currentUser) && ($currentUser['id'] == $article['user_id'] || $currentUser['is_admin'] == 1)) :
                     ?>
                         <div class="article-actions">
-                            <a href="<?= $basePath ?>/articles/edit/<?= escape_html($article['id']) ?>" class="btn-edit">Edit</a>
-                            <a href="<?= $basePath ?>/articles/delete/<?= escape_html($article['id']) ?>"
+                            <a href="<?= $basePath ?>/articles/edit/<?= escape_html($article['id']) ?>" class="btn-edit-global">Edit</a>
+                            <a href="<?= $basePath ?>/articles/delete/<?= escape_html($article['id']) ?>" class="btn-delete" 
                             onclick="return confirm('Yakin ingin menghapus artikel ini?')">Hapus</a>
                         </div>
                     <?php endif; ?>
