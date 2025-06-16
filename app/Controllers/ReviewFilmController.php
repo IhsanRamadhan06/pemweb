@@ -31,7 +31,7 @@ class ReviewFilmController {
         }
 
         $filmModel = new Film($this->pdo);
-        $films = $filmModel->getAllFilm();
+        $films = $filmModel->getAllFilms();
 
         view('review_films/create', [
             'title' => 'Tambah Review Film',

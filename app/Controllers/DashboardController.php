@@ -24,7 +24,7 @@ class DashboardController {
         }
 
         // Ambil data film dari database
-        $dbFilms = $this->filmModel->getAllFilm(); // Mengambil semua film dari database
+        $dbFilms = $this->filmModel->getAllFilms(); // Mengambil semua film dari database
 
         // Ambil data series dari database
         $dbSeries = $this->seriesModel->getAllSeries(); // Mengambil semua series dari database

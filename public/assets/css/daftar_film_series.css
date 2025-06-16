@@ -1,0 +1,656 @@
+/* niflix_project/public/assets/css/series.css */
+
+/* Tambahkan bagian ini untuk mengatur background gambar pada halaman series */
+body {
+    background: url('https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png') no-repeat center center fixed;
+    background-size: cover;
+    animation: backgroundMove 10s ease-in-out infinite;
+}
+
+/* Jika Anda ingin menggunakan animasi, pastikan keyframes didefinisikan, contohnya seperti di auth.css */
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 2% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+.series-container,
+.article-detail-container, /* Pertahankan ini jika series/show.php menggunakannya */
+.form-container { /* TAMBAHKAN ATAU PERBARUI BLOK INI */
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.9); /* Latar belakang gelap transparan */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.series-container h1,
+.article-detail-container h1,
+.form-container h1 { /* TAMBAHKAN ATAU PERBARUI BLOK INI */
+    color: #ffcc00;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+
+/* Slider Specific Styles for Series */
+.slider-wrapper {
+    position: relative;
+    width: 100%; /* Adjust as needed */
+    overflow: hidden;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Add styles for slider arrows */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 24px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    line-height: 1; /* To vertically center the arrow symbol */
+}
+
+.slider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left-arrow {
+    left: 0px;
+}
+
+.right-arrow {
+    right: 0px;
+}
+
+.slider-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Snap to items when scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+    width: 100%;
+    gap: 15px; /* Gap between slider items */
+    padding: 25px 0; /* Add some padding if needed */
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+}
+
+.slider-item {
+    flex: 0 0 calc(25% - 15px); /* Show 4 items per row, accounting for gap */
+    /* On smaller screens, you might want to show fewer items, e.g., 50% for 2 items */
+    min-width: 170px; /* Minimum width for each item to prevent shrinking too much */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    background: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    scroll-snap-align: start; /* Snap to the start of each item */
+    height: 307px;
+    position: relative; /* Needed for absolute positioning of hover info */
+}
+
+.slider-item:hover {
+    transform: translateY(-5px);
+}
+
+.slider-item a {
+    text-decoration: none;
+    /* color: #7851A9; */
+    color: #008080;
+    position: relative; /* For positioning series-hover-info */
+    display: block; /* To make anchor occupy full space for hover */
+    width: 100%;
+    height: 100%; /* Ensure the anchor covers the image */
+}
+
+.slider-item h4 {
+    color: #ffcc00;
+}
+
+.series-thumbnail {
+    width: 100%;
+    max-width: 250px; /* Max width for individual image */
+    height: 300px;
+    border-radius: 5px;
+    margin-bottom: -12px;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+}
+
+/* NEW: Series Hover Info */
+.series-hover-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 305px; /* Cover the image area */
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 5px; /* Match image border-radius */
+    pointer-events: none; /* Allow clicks to pass through when hidden */
+    text-align: center;
+    flex-direction: column; /* Stack title and year */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.series-item a:hover .series-hover-info,
+.slider-item a:hover .series-hover-info { /* TAMBAHKAN BARIS INI */
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.series-hover-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffcc00;
+}
+
+/* NEW: Series Stats (Likes, Watched, Comments) */
+.series-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 0px; /* Push to bottom */
+    padding-top: 15px;
+    border-top: 1px solid #444;
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.series-stats .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.series-stats .stat-item i {
+    color: #ffcc00; /* Icon color */
+    font-size: 1.1em;
+}
+
+/* NEW: Series Stats (Likes, Watched, Comments) */
+.slider-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 0px; /* Push to bottom */
+    padding-top: 15px;
+    border-top: 1px solid #444;
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.slider-stats .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.slider-stats .stat-item i {
+    color: #ffcc00; /* Icon color */
+    font-size: 1.1em;
+}
+
+/* Detail Series (single-article) */
+.single-article { /* Reusing article styles as it's structurally similar */
+    background: #222;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+.single-article h1 {
+    text-align: left;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.series-full-image {
+    width: 100%;
+    max-width: 500px; /* Adjust as needed for larger display */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.single-article .series-meta { /* Corrected from .single-article */
+    font-size: 1em;
+    color: #bbb;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.single-article .article-content { /* Reusing, but apply to series description */
+    line-height: 1.8;
+    font-size: 1.1em;
+    color: #eee;
+    text-align: justify;
+}
+
+.btn-back {
+    margin-bottom: 20px;
+}
+
+/* .series-actions a {
+    color: #008080;
+    text-decoration: none;
+} */
+
+.series-actions {
+    display: flex; /* Untuk menempatkan tombol bersebelahan */
+    gap: 15px; /* Jarak antar tombol */
+    justify-content: center; /* Pusatkan tombol */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #333; /* Garis pemisah opsional */
+}
+
+.series-actions .btn-edit,
+.series-actions .btn-delete {
+    display: inline-block; /* Agar bisa menerapkan padding dll. */
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px; /* Sedikit lebih melengkung */
+    font-weight: bold;
+    font-size: 1.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    min-width: 120px; /* Lebar minimum agar konsisten */
+    border: none; /* Hapus border default */
+    cursor: pointer;
+}
+
+.series-actions .btn-edit {
+    background-color: #2196F3; /* Warna hijau kebiruan untuk edit */
+    color: white; /* Teks putih */
+}
+
+.series-actions .btn-edit:hover {
+    background-color: #006666; /* Sedikit lebih gelap saat hover */
+    transform: translateY(-2px); /* Efek angkat */
+}
+
+.series-actions .btn-delete {
+    background-color: #f44336; /* Merah terang khas Netflix untuk hapus */
+    color: white; /* Teks putih */
+}
+
+.series-actions .btn-delete:hover {
+    background-color: #b20710; /* Merah lebih gelap saat hover */
+    transform: translateY(-2px); /* Efek angkat */
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 12px 25px; /* Sesuaikan padding */
+    background: #ffcc00;
+    color: #333; /* Teks lebih gelap agar kontras */
+    text-decoration: none;
+    border-radius: 8px; /* Konsisten dengan tombol lain */
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    margin: 15px 120px; /* Sesuaikan margin */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambah bayangan */
+}
+
+.btn-link:hover {
+    background: #e6b800; 
+    transform: translateY(-2px);
+}
+
+/* .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ffcc00;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin: 10px 120px;
+} */
+
+/* Styling for "Daftar Series" (All Series section) */
+.series-list { /* This now acts as the grid container */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive default */
+    gap: 10px; /* Jarak antar item grid */
+    padding: 20px 0; /* Sesuaikan padding jika diperlukan */
+}
+
+/* For explicit 5 columns on larger screens */
+@media (min-width: 1024px) { /* Adjust breakpoint as needed for desktop */
+    .series-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.series-item { /* This now acts as the grid item */
+    background: #222;
+    padding: 5px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 85%;
+    position: relative; /* Needed for absolute positioning of hover info */
+}
+
+.series-item:hover {
+    transform: scale(1.03);
+}
+
+.series-item img {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+}
+
+.series-item h4 {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #ffcc00;
+    word-break: break-word;
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+/* Styling untuk Formulir (create/edit series) */
+.form-container form .input-group { /* TAMBAHKAN BLOK INI */
+    margin-bottom: 20px;
+}
+
+.input-group img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #333;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.form-container form label { /* TAMBAHKAN BLOK INI */
+    display: block;
+    color: #ffcc00;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.form-container form input[type="text"], /* TAMBAHKAN BLOK INI */
+.form-container form input[type="email"],
+.form-container form input[type="password"],
+.form-container form textarea,
+.form-container form input[type="number"] { /* Tambah type number untuk tahun rilis */
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #333;
+    color: white;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.form-container form input:focus, /* TAMBAHKAN BLOK INI */
+.form-container form textarea:focus,
+.form-container form input[type="number"]:focus { /* Tambah type number */
+    border-color: #ffcc00;
+    outline: none;
+    background: #2a2a2a;
+}
+
+.form-container form .btn { /* TAMBAHKAN BLOK INI */
+    width: auto;
+    display: inline-block;
+    padding: 10px 25px;
+}
+
+/* Custom styles for validation messages */
+.validation-message {
+    color: transparent; /* Defaultnya transparan atau sembunyikan */
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: block;
+    min-height: 1em; /* Beri tinggi minimum agar layout tidak bergeser */
+}
+
+.validation-message.error {
+    color: #f44336; /* Merah untuk pesan error */
+}
+
+.validation-message.success {
+    color: #4CAF50; /* Hijau untuk pesan sukses (opsional) */
+}
+
+/* ... (kode yang sudah ada) ... */
+
+/* Media Queries for responsiveness for series */
+@media (max-width: 768px) {
+    .series-container,
+    .article-detail-container,
+    .form-container { /* TAMBAHKAN INI */
+        padding: 20px;
+        margin: 15px auto;
+    }
+
+    .series-container h1,
+    .article-detail-container h1,
+    .form-container h1 { /* TAMBAHKAN INI */
+        font-size: 1.8em;
+    }
+
+    /* ... (Gaya media query sebelumnya untuk slider-item dan grid-container) ... */
+    .series-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Target 2-3 kolom di tablet */
+        gap: 15px;
+    }
+    .series-item img {
+        max-width: 165px; /* Even smaller on tablets */
+    }
+    .series-item h4 {
+        font-size: 1em;
+    }
+
+    /* .btn-link {
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 5px 90px;
+    } */
+
+    .series-actions {
+        flex-direction: column; /* Tombol stack vertikal di layar kecil */
+        align-items: center; /* Pusatkan saat vertikal */
+        gap: 10px; /* Kurangi gap */
+    }
+
+    .series-actions .btn-edit,
+    .series-actions .btn-delete,
+    .btn-link {
+        width: 80%; /* Buat tombol agak lebar */
+        max-width: 250px; /* Batasi lebar maksimal */
+        margin: 5px auto; /* Pusatkan secara horizontal */
+    }
+
+    .btn-link {
+        margin: 10px auto; /* Override margin yang lebih spesifik untuk btn-link */
+    }
+}
+
+@media (max-width: 480px) {
+    .series-container,
+    .article-detail-container,
+    .form-container { /* TAMBAHKAN INI */
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .series-container h1,
+    .article-detail-container h1,
+    .form-container h1 { /* TAMBAHKAN INI */
+        font-size: 1.5em;
+    }
+
+    .slider-item {
+        min-width: 190px;
+        height: 307px;
+    }
+
+    .series-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Target 1-2 kolom di mobile */
+        gap: 10px;
+    }
+    .series-item {
+        padding: 8px;
+        height: 210px; /* Adjust height for smaller screens */
+        margin-top: 10px;
+    }
+    .series-item img {
+        max-width: 160px;
+        height: 200px; /* Adjust image height for smaller screens */
+    }
+    .series-item h4 {
+        font-size: 0.9em;
+    }
+    .series-item .btn {
+        font-size: 0.7em;
+        padding: 3px 8px;
+    }
+    .series-stats {
+        font-size: 0.8em;
+        padding-top: 5px;
+        margin-top: -20px;
+    }
+    .series-stats .stat-item i {
+        font-size: 1em;
+    }
+    .btn-link {
+        padding: 10px 10px;
+        border-radius: 5px;
+        margin: 5px 28px;
+    }
+}
+
+@media (max-width: 376px) {
+    .slider-item {
+        min-width: 165px;
+    }
+    .series-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Target 1-2 kolom di mobile */
+        gap: 10px;
+    }
+    .series-item {
+        padding: 8px;
+        height: 210px;
+        margin-bottom: 10px;
+    }
+    .series-item img {
+        max-width: 160px;
+        height: 200px;
+    }
+    .series-item h4 {
+        font-size: 0.9em;
+    }
+    .series-item .btn {
+        font-size: 0.7em;
+        padding: 3px 8px;
+    }
+    .btn-link {
+        padding: 10px 10px;
+        border-radius: 5px;
+        margin: 5px 15px;
+    }
+}
+
+@media (max-width: 321px) {
+    .slider-item {
+        min-width: 135px;
+        height: 210px;
+        margin-bottom: 80px;
+    }
+    .series-list {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Target 1-2 kolom di mobile */
+        gap: 10px;
+    }
+    .series-item {
+        padding: 8px;
+        height: 210px;
+    }
+    .series-item img {
+        max-width: 160px;
+        height: 200px;
+    }
+    .series-item h4 {
+        font-size: 0.9em;
+    }
+    .series-item .btn {
+        font-size: 0.7em;
+        padding: 3px 8px;
+    }
+
+    .series-thumbnail {
+        height: 200px;
+    }
+    .series-stats {
+        height: 15px;
+    }
+    .slider-stats {
+        height: 30px;
+    }
+    .btn-link {
+        padding: 10px 5px;
+        border-radius: 5px;
+        margin: 5px 7px;
+    }
+}

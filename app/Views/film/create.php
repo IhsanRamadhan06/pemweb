@@ -30,22 +30,34 @@ $is_popular = $film['is_popular'] ?? '';
 
         <form action="<?= $basePath ?>/daftar_film/create" method="POST"> <div class="input-group">
                 <label for="title">Judul film:</label>
-                <input type="text" id="title" name="title" required value="<?= escape_html($filmTitle) ?>">
+                <input type="text" id="title" name="title" required value="<?= escape_html($filmTitle) ?>" data-field="title">
+                <span class="validation-message error" id="title-error">
+                    <?php echo isset($error['title']) ? escape_html($error['title']) : ''; ?>
+                </span>
             </div>
 
             <div class="input-group">
                 <label for="description">Deskripsi Film:</label>
-                <textarea id="description" name="description" rows="10" required><?= escape_html($filmDescription) ?></textarea>
+                <textarea id="description" name="description" rows="10" required data-field="description"><?= escape_html($filmDescription) ?></textarea>
+                <span class="validation-message error" id="description-error">
+                    <?php echo isset($error['description']) ? escape_html($error['description']) : ''; ?>
+                </span>
             </div>
 
             <div class="input-group">
                 <label for="release_year">Tahun Rilis:</label>
-                <input type="number" id="release_year" name="release_year" required value="<?= escape_html($filmReleaseYear) ?>">
+                <input type="number" id="release_year" name="release_year" required value="<?= escape_html($filmReleaseYear) ?>" data-field="release_year">
+                <span class="validation-message error" id="release_year-error">
+                    <?php echo isset($error['release_year']) ? escape_html($error['release_year']) : ''; ?>
+                </span>
             </div>
 
             <div class="input-group">
                 <label for="image_url">URL Gambar Film (Opsional):</label>
-                <input type="text" id="image_url" name="image_url" placeholder="http://example.com/image.jpg" value="<?= escape_html($filmImageUrl) ?>">
+                <input type="text" id="image_url" name="image_url" placeholder="http://example.com/image.jpg" value="<?= escape_html($filmImageUrl) ?>" data-field="image_url">
+                <span class="validation-message error" id="image_url-error">
+                    <?php echo isset($error['image_url']) ? escape_html($error['image_url']) : ''; ?>
+                </span>
                 <small>Masukkan URL lengkap gambar film.</small>
             </div>
 

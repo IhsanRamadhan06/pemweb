@@ -36,9 +36,9 @@ if ($basePath === '/') {
     } elseif (in_array('profile', $pathSegments)) {
         $pageCss = 'profile.css';
     } elseif (in_array('daftar_series', $pathSegments)) {
-        $pageCss = 'series.css';
+        $pageCss = 'daftar_film_series.css';
     } elseif (in_array('daftar_film', $pathSegments)) {
-        $pageCss = 'series.css';
+        $pageCss = 'daftar_film_series.css';
     } elseif (in_array('review_films', $pathSegments)) { // Keep existing
         $pageCss = 'review.css';
     } elseif (in_array('review_series', $pathSegments)) { // Keep existing

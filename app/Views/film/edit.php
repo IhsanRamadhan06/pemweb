@@ -35,19 +35,27 @@ $filmImageUrl = escape_html($film['image_url']); //
                 </div>
 
                 <div class="input-group">
+                    <label for="title">Judul Film:</label>
+                    <input type="text" id="title" name="title" required value="<?= escape_html($_POST['title'] ?? $film['title']) ?>" data-field="title"> <span class="validation-message error" id="title-error"> <?php if (isset($error['title'])): ?>
+                            <?= escape_html($error['title']) ?>
+                        <?php endif; ?>
+                    </span>
+                </div>
+
+                <div class="input-group">
                     <label for="description">Deskripsi Film:</label>
-                    <textarea id="description" name="description" rows="10" required><?= escape_html($_POST['description'] ?? $film['description']) ?></textarea>
-                    <?php if (isset($error['description'])): ?>
-                        <span class="validation-message error"><?= escape_html($error['description']) ?></span>
-                    <?php endif; ?>
+                    <textarea id="description" name="description" rows="10" required data-field="description"><?= escape_html($_POST['description'] ?? $film['description']) ?></textarea> <span class="validation-message error" id="description-error"> <?php if (isset($error['description'])): ?>
+                            <?= escape_html($error['description']) ?>
+                        <?php endif; ?>
+                    </span>
                 </div>
 
                 <div class="input-group">
                     <label for="release_year">Tahun Rilis:</label>
-                    <input type="number" id="release_year" name="release_year" required value="<?= escape_html($_POST['release_year'] ?? $film['release_year']) ?>">
-                    <?php if (isset($error['release_year'])): ?>
-                        <span class="validation-message error"><?= escape_html($error['release_year']) ?></span>
-                    <?php endif; ?>
+                    <input type="number" id="release_year" name="release_year" required value="<?= escape_html($_POST['release_year'] ?? $film['release_year']) ?>" data-field="release_year"> <span class="validation-message error" id="release_year-error"> <?php if (isset($error['release_year'])): ?>
+                            <?= escape_html($error['release_year']) ?>
+                        <?php endif; ?>
+                    </span>
                 </div>
 
                 <div class="input-group">
@@ -56,10 +64,10 @@ $filmImageUrl = escape_html($film['image_url']); //
                         <img src="<?= $filmImageUrl ?>" alt="Current Film Image" style="max-width: 150px; height: auto; margin-bottom: 10px; border-radius: 5px;">
                         <br>
                     <?php endif; ?>
-                    <input type="text" id="image_url" name="image_url" placeholder="http://example.com/image.jpg" value="<?= escape_html($_POST['image_url'] ?? $filmImageUrl) ?>">
-                    <?php if (isset($error['image_url'])): ?>
-                        <span class="validation-message error"><?= escape_html($error['image_url']) ?></span>
-                    <?php endif; ?>
+                    <input type="text" id="image_url" name="image_url" placeholder="http://example.com/image.jpg" value="<?= escape_html($_POST['image_url'] ?? $filmImageUrl) ?>" data-field="image_url"> <span class="validation-message error" id="image_url-error"> <?php if (isset($error['image_url'])): ?>
+                            <?= escape_html($error['image_url']) ?>
+                        <?php endif; ?>
+                    </span>
                     <small>Masukkan URL lengkap gambar film.</small>
                 </div>
 

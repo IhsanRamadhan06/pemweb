@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (result.success) {
-                    notificationContainer.innerHTML = <div class="notification success">${result.message}</div>;
+                    notificationContainer.innerHTML = `<div class="notification success">${result.message}</div>`;
                     if (result.new_photo_url) {
                         profilePhotoImg.src = result.new_photo_url;
                     }
@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (confirmPasswordInput) confirmPasswordInput.value = '';
                     }
                 } else {
-                    notificationContainer.innerHTML = <div class="notification error">${result.message}</div>;
+                    notificationContainer.innerHTML = `<div class="notification error">${result.message}</div>`;
                 }
             } catch (error) {
                 console.error('Error:', error);
-                notificationContainer.innerHTML = <div class="notification error">Terjadi kesalahan jaringan atau server.</div>;
+                notificationContainer.innerHTML = `<div class="notification error">Terjadi kesalahan jaringan atau server.</div>`;
             } finally {
                 profileForm.querySelector('.btn-update').disabled = false;
                 profileForm.querySelector('.btn-update').textContent = 'Update Profile';
@@ -286,5 +286,126 @@ document.addEventListener('DOMContentLoaded', () => {
                 validateField(e.target);
             });
         });
+    }
+
+    // --- AJAX Validation for Film Create/Edit Form ---
+    const filmForm = document.querySelector('.form-container form'); // Ini bisa sama, tapi pastikan hanya menargetkan form yang relevan
+    // Anda mungkin perlu menargetkan form secara lebih spesifik jika ada banyak form dengan class .form-container form
+    // Contoh: const filmForm = document.getElementById('createFilmForm') || document.getElementById('editFilmForm');
+    // Untuk saat ini, kita asumsikan .form-container form hanya ada di halaman create/edit film/series
+    // dan logic `if (filmForm)` akan memastikan kode hanya berjalan jika form film ada.
+
+    if (filmForm) {
+        // Cek apakah ini form Film atau Series. Jika form Series sudah ditangani, lewati ini.
+        // Asumsi: form Series memiliki input 'title' dengan data-field='title' dan form Film juga.
+        // Kita bisa periksa URL atau keberadaan elemen spesifik.
+        // Untuk kesederhanaan, kita akan jalankan jika filmForm ada dan belum ditangani oleh logic seriesForm sebelumnya.
+        const titleInputFilm = filmForm.querySelector('input[data-field="title"]');
+        // Pastikan ini adalah form film dan bukan form series yang sudah ditangani
+        // Salah satu cara adalah memeriksa action URL atau ID spesifik pada form jika ada
+        const isFilmForm = filmForm.action.includes('daftar_film'); // Asumsi action URL mengandung 'daftar_film'
+
+        if (isFilmForm) {
+            const inputFieldsFilm = filmForm.querySelectorAll('input[data-field], textarea[data-field], select[data-field]');
+            const currentYearFilm = new Date().getFullYear();
+            let validationTimersFilm = {}; // Objek untuk menyimpan timer untuk debouncing
+
+            const validateFieldFilm = async (inputElement) => {
+                const fieldName = inputElement.dataset.field;
+                const fieldValue = inputElement.value;
+                const errorSpan = document.getElementById(`${fieldName}-error`);
+
+                // Hapus pesan error sebelumnya
+                if (errorSpan) {
+                    errorSpan.textContent = '';
+                    errorSpan.classList.remove('error');
+                }
+
+                // Validasi sisi klien awal
+                let clientSideError = '';
+                if (fieldName === 'release_year') {
+                    const year = parseInt(fieldValue);
+                    if (fieldValue.trim() === '') {
+                        clientSideError = 'Tahun rilis tidak boleh kosong.';
+                    } else if (isNaN(year) || year <= 0) {
+                        clientSideError = 'Tahun rilis harus berupa angka valid.';
+                    } else if (year > currentYearFilm) {
+                        clientSideError = `Tahun rilis tidak boleh lebih dari tahun sekarang (${currentYearFilm}).`;
+                    } else if (year < 1888) {
+                        clientSideError = 'Tahun rilis terlalu lama (minimal 1888).';
+                    }
+                } else if (fieldName === 'title' && fieldValue.trim() === '') {
+                    clientSideError = 'Judul film tidak boleh kosong.';
+                } else if (fieldName === 'description' && fieldValue.trim() === '') {
+                    clientSideError = 'Deskripsi film tidak boleh kosong.';
+                } else if (fieldName === 'image_url' && fieldValue.trim() !== '' && !/^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})$/i.test(fieldValue)) {
+                    clientSideError = 'Format URL gambar tidak valid.';
+                }
+
+                if (clientSideError) {
+                    if (errorSpan) {
+                        errorSpan.textContent = clientSideError;
+                        errorSpan.classList.add('error');
+                    }
+                    return; // Hentikan jika validasi klien gagal
+                }
+
+                // Jika validasi klien lolos, lanjutkan ke validasi server
+                const formData = new FormData();
+                formData.append('field', fieldName);
+                formData.append('value', fieldValue);
+
+                try {
+                    const baseUrl = window.location.origin + BASE_URL;
+                    const response = await fetch(`${baseUrl}/daftar_film/validateFieldAjax`, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                    });
+
+                    const result = await response.json();
+
+                    if (!result.isValid) {
+                        if (errorSpan) {
+                            errorSpan.textContent = result.message;
+                            errorSpan.classList.add('error');
+                        }
+                    } else {
+                        if (errorSpan) {
+                            errorSpan.textContent = '';
+                            errorSpan.classList.remove('error');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error during AJAX validation for film:', error);
+                    if (errorSpan && !errorSpan.textContent) {
+                        errorSpan.textContent = 'Terjadi kesalahan validasi atau koneksi.';
+                        errorSpan.classList.add('error');
+                    }
+                }
+            };
+
+            inputFieldsFilm.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const fieldName = e.target.dataset.field;
+                    if (validationTimersFilm[fieldName]) {
+                        clearTimeout(validationTimersFilm[fieldName]);
+                    }
+                    validationTimersFilm[fieldName] = setTimeout(() => {
+                        validateFieldFilm(e.target);
+                    }, 500); // 500ms delay
+                });
+
+                input.addEventListener('blur', (e) => {
+                    const fieldName = e.target.dataset.field;
+                    if (validationTimersFilm[fieldName]) {
+                        clearTimeout(validationTimersFilm[fieldName]);
+                    }
+                    validateFieldFilm(e.target);
+                });
+            });
+        }
     }
 });

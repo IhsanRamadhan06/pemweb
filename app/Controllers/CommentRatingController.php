@@ -25,7 +25,7 @@ class CommentRatingController {
     }
 
     public function index() {
-        $films = $this->filmModel->getAllFilm();
+        $films = $this->filmModel->getAllFilms();
         $series = $this->seriesModel->getAllSeries();
 
         $message = $_GET['message'] ?? Session::getFlash('message');

@@ -13,7 +13,7 @@ class Film {
      * Mengambil semua film dengan rata-rata rating (dari comments_rating), jumlah komentar, dan jumlah suka.
      * @return array
      */
-    public function getAllFilm() {
+    public function getAllFilms() {
         $stmt = $this->pdo->prepare("
             SELECT
                 f.*,

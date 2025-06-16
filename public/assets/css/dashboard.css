@@ -1,4 +1,4 @@
-niflix_project/public/assets/css/dashboard.css
+/* niflix_project/public/assets/css/dashboard.css */
 
 .welcome-message {
     text-align: center;
@@ -58,7 +58,6 @@ niflix_project/public/assets/css/dashboard.css
 .slider-container {
     display: flex;
     overflow-x: auto;
-    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -92,6 +91,8 @@ niflix_project/public/assets/css/dashboard.css
 }
 
 h1 {
+    margin-left: 0px;
+    margin-bottom: 10px;
     text-align: center;
     color: #ffcc00;
 }
@@ -99,14 +100,10 @@ h1 {
 /* Media Queries for Responsiveness */
 @media (min-width: 768px) {
     .welcome-message {
-        padding: 20px;
-        color: #ff9100;
-        margin-left: 45px;
-        font-size: 24px;
-        font-weight: bold;
-        background-color: #111;
-        border-radius: 5px;
-        box-sizing: border-box;
+        text-align: start;
+        margin-top: 0px;
+        margin-left: 30px;
+        margin-right: 30px;
     }
 
     .slider-item {

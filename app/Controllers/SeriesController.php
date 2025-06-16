@@ -96,6 +96,11 @@ class SeriesController {
      * @param int $id ID series
      */
     public function show($id) {
+        // Pastikan pengguna sudah login
+        if (!Session::has('user')) {
+            redirect('/auth/login');
+        }
+
         $series = $this->seriesModel->findById($id);
 
         if (!$series) {
