@@ -41,7 +41,7 @@ $isAdmin = isset($currentUser) && $currentUser['is_admin'] == 1;
                     </div>
                 <?php endif; ?>
             </article>
-            <a href="<?= $basePath ?>/review_film/create" class="btn-link">Review </a>
+            <a href="<?= $basePath ?>/review_films/create" class="btn-link">Review </a>
             <a href="<?= $basePath ?>/komentar_rating/detail/film/<?= escape_html($film['id']) ?>" class="btn-link">Komentar Rating</a>
         <?php else: ?>
             <p>Film tidak ditemukan.</p>

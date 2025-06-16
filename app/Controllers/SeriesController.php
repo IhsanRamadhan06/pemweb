@@ -35,7 +35,7 @@ class SeriesController {
         $currentUserId = Session::get('user')['id']; // Ambil ID pengguna yang sedang login
 
         // Ambil series populer (ID 1-8)
-        $popularSeries = $this->seriesModel->getSeriesByIdRange($currentUserId);
+        $popularSeries = $this->seriesModel->getSeriesByIdRange();
         // Ambil semua series
         $allSeries = $this->seriesModel->getAllSeries($currentUserId);
 
@@ -129,8 +129,12 @@ class SeriesController {
             $description = trim($_POST['description'] ?? '');
             $releaseYear = filter_var($_POST['release_year'] ?? '', FILTER_VALIDATE_INT);
             $imageUrl = trim($_POST['image_url'] ?? '');
-            $is_popular_str = $_POST['is_popular'] ?? 'NO'; // Re-capture for POST
-            $is_popular = ($is_popular_str === 'YES') ? 1 : 0; // Convert to integer (0 or 1)
+            // $is_popular_str = $_POST['is_popular'] ?? 'NO'; // Re-capture for POST
+            // $is_popular = ($is_popular_str === 'YES') ? 1 : 0; // Convert to integer (0 or 1)
+            // Capture integer from POST directly
+            $is_popular = filter_var($_POST['is_popular'] ?? 0, FILTER_VALIDATE_INT);
+            // Pastikan nilai hanya 0 atau 1
+            $is_popular = ($is_popular === 1) ? 1 : 0;
             $creatorId = Session::get('user')['id']; // AMBIL ID PENGGUNA DARI SESI
 
             // Server-side validation
@@ -261,8 +265,12 @@ class SeriesController {
             $description = trim($_POST['description'] ?? '');
             $releaseYear = filter_var($_POST['release_year'] ?? '', FILTER_VALIDATE_INT);
             $imageUrl = trim($_POST['image_url'] ?? '');
-            $is_popular_str = $_POST['is_popular'] ?? 'NO'; // Capture string from POST
-            $is_popular = ($is_popular_str === 'YES') ? 1 : 0; // Convert to integer
+            // $is_popular_str = $_POST['is_popular'] ?? 'NO'; // Capture string from POST
+            // $is_popular = ($is_popular_str === 'YES') ? 1 : 0; // Convert to integer
+            // Capture integer from POST directly
+            $is_popular = filter_var($_POST['is_popular'] ?? 0, FILTER_VALIDATE_INT);
+            // Pastikan nilai hanya 0 atau 1
+            $is_popular = ($is_popular === 1) ? 1 : 0;
             $editorId = Session::get('user')['id']; //
 
             // Server-side validation
@@ -293,8 +301,10 @@ class SeriesController {
                 if ($this->seriesModel->update($id, $title, $description, $releaseYear, $imageUrl, $is_popular, $editorId)) {
                     $message = 'Series berhasil diperbarui!';
                     $messageType = 'success';
-                    $series = $this->seriesModel->findById($id); // Refresh data series
-                    redirect('/daftar_series/show/' . $id . '?message=' . urlencode($message) . '&type=' . urlencode($messageType)); //
+                    // $series = $this->seriesModel->findById($id); // Refresh data series
+                    // redirect('/daftar_series/show/' . $id . '?message=' . urlencode($message) . '&type=' . urlencode($messageType)); //
+                    // exit();
+                    redirect('/daftar_series?message=' . urlencode($message) . '&type=' . urlencode($messageType));
                     exit();
                 } else {
                     $message = 'Gagal memperbarui series.';

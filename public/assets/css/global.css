@@ -274,6 +274,60 @@ footer {
     }
 }
 
+/* Laptop/Desktop (Min-width 1200px) */
+@media (min-width: 1200px) {
+    header {
+        padding: 0px;
+    }
+
+    .nav-menu ul li {
+        padding: 0 15px;
+    }
+
+    .nav-menu ul li a {
+        font-size: 16px;
+    }
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+        width: auto;
+        max-height: none;
+        overflow-y: visible;
+        flex-grow: 1;
+        justify-content: flex-end; /* Dorong menu ke kanan */
+        align-items: center;
+    }
+
+    .nav-menu ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        flex-wrap: wrap; /* Izinkan wrap agar tidak terpotong jika terlalu banyak item */
+        justify-content: flex-end;
+        width: 1200px; /* Biarkan lebar ul menyesuaikan konten */
+        padding-right: 185px;
+    }
+
+    .nav-menu ul li {
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    .nav-menu ul li a {
+        padding: 8px 0;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+}
+
 @media (min-width: 1440px) {
     header {
         padding: 0px;

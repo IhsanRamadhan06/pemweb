@@ -65,8 +65,8 @@ $is_popular = $_POST['is_popular'] ?? ($series['is_popular'] ?? 0); // Handle 'i
             <div class="input-group">
                     <label for="is_popular">Status Popular:</label>
                     <select id="is_popular" name="is_popular">
-                        <option value="0" <?= $is_popular == 0 ? 'selected' : '' ?>>Tidak</option>
-                        <option value="1" <?= $is_popular == 1 ? 'selected' : '' ?>>Ya</option>
+                        <option value="0" <?= (isset($series['is_popular']) ? $series['is_popular'] == 0 : true) ? 'selected' : '' ?>>Tidak</option>
+                        <option value="1" <?= (isset($series['is_popular']) ? $series['is_popular'] == 1 : false) ? 'selected' : '' ?>>Ya</option>
                     </select>
             </div>
 

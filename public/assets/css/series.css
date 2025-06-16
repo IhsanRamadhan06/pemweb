@@ -293,7 +293,7 @@ body {
 }
 
 .series-actions .btn-edit {
-    background-color: #008080; /* Warna hijau kebiruan untuk edit */
+    background-color: #2196F3; /* Warna hijau kebiruan untuk edit */
     color: white; /* Teks putih */
 }
 
@@ -303,7 +303,7 @@ body {
 }
 
 .series-actions .btn-delete {
-    background-color: #e50914; /* Merah terang khas Netflix untuk hapus */
+    background-color: #f44336; /* Merah terang khas Netflix untuk hapus */
     color: white; /* Teks putih */
 }
 
